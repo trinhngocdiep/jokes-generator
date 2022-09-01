@@ -14,8 +14,8 @@ public class JokesService {
         this.jokesProvider = jokesProvider;
     }
 
-    public List<String> findJokes(String keyword) {
-        List<String> jokes = jokesProvider.getJokes(keyword);
+    public List<String> findJokes(String keyword, int limit) {
+        List<String> jokes = jokesProvider.getJokes(keyword, limit);
         Pattern keywordPattern = Pattern.compile(String.format("\\b%s\\b", keyword));
         return jokes.stream().filter(e -> keywordPattern.matcher(e).find()).collect(Collectors.toList());
     }

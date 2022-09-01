@@ -34,10 +34,13 @@ public class JokesResource {
     @Metered(name = "get-requests-metered")
     @CacheControl(maxAge = 1, maxAgeUnit = TimeUnit.DAYS)
     public JokesResponse getJokes(@QueryParam("keyword") String keyword) {
+        if (keyword == null || keyword.trim().length() < 3) {
+            throw new BadRequestException("Please enter a keyword with at least 3 characters");
+        }
         if (counter.increase(keyword) > appConfig.getRateLimitConfiguration().getKeywordRepeatCount()) {
             throw new BadRequestException("You have been telling the same jokes too many times. Try another one!");
         }
-        List<String> jokes = jokesService.findJokes(keyword);
+        List<String> jokes = jokesService.findJokes(keyword, appConfig.getMaxJokesCount());
         return new JokesResponse(jokes);
     }
 

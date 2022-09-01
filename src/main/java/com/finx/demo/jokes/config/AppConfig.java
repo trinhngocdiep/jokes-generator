@@ -9,6 +9,8 @@ import javax.validation.constraints.NotNull;
 
 public class AppConfig extends Configuration {
 
+    private int maxJokesCount = 3;
+
     @Valid
     @NotNull
     private HttpClientConfiguration httpClient = new HttpClientConfiguration();
@@ -33,5 +35,13 @@ public class AppConfig extends Configuration {
     @JsonProperty("rateLimit")
     public void setRateLimitConfiguration(RateLimitConfiguration rateLimitConfiguration) {
         this.rateLimitConfiguration = rateLimitConfiguration;
+    }
+
+    public int getMaxJokesCount() {
+        return maxJokesCount;
+    }
+
+    public void setMaxJokesCount(int maxJokesCount) {
+        this.maxJokesCount = maxJokesCount;
     }
 }

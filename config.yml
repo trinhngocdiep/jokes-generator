@@ -50,5 +50,7 @@ httpClient:
   connectionRequestTimeout: 10s
 
 rateLimit:
-  keywordRepeatCount: 2
-  keywordRepeatWindowInSeconds: 10
+  keywordRepeatCount: 5
+  keywordRepeatWindowInSeconds: 300
+
+maxJokesCount: 3
